@@ -12,7 +12,7 @@
 
 - [Getting Started](#-getting-started)
 - [Training & Analysis](#-patchsae-training-and-analysis)
-- [Test-Time-Adaptation(Parkprogrammer addtion)](#test-time-adaptation-with-neuron-amplification)
+- [Neuron Amplication(HERE!)](#-test-time-adaptation-with-neuron-amplification)
 - [License & Credits](#-license--credits)
 
 ## 🛠 Getting Started
