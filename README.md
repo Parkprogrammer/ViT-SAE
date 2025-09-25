@@ -1,4 +1,4 @@
-# From patchSAE to Neroun Amplication and maybe TTA
+# From patchSAE to Neroun Amplication and TTA
 
 > Original Authors of the project is  https://github.com/dynamical-inference/patchsae
 
