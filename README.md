@@ -1,9 +1,8 @@
 # PatchSAE: Sparse Autoencoders Reveal Selective Remapping of Visual Concepts During Adaptation
 
-[![Website & Demo](https://img.shields.io/badge/🔗_Website_&_Demo-blue)](https://dynamical-inference.ai/patchsae/)
-[![Paper](https://img.shields.io/badge/📑_Paper-arXiv-red)](https://arxiv.org/abs/2412.05276)
-[![OpenReview](https://img.shields.io/badge/OpenReview-ICLR_2025-green)](https://openreview.net/forum?id=imT03YXlG2)
-[![Hugging Face Demo](https://img.shields.io/badge/🤗_Hugging_Face-Demo-yellow)](https://huggingface.co/spaces/dynamical-inference/patchsae-demo)
+> Original Authors of the project is  https://github.com/dynamical-inference/patchsae
+
+### *Additional works were done at section TTA 
 
 <div align="center">
     <img width="800" alt="PatchSAE visualization" src="./assets/sae_arch.gif">
@@ -12,9 +11,8 @@
 ## 🚀 Quick Navigation
 
 - [Getting Started](#-getting-started)
-- [Interactive Demo](#-interactive-demo)
 - [Training & Analysis](#-patchsae-training-and-analysis)
-- [Status Updates](#-status-updates)
+- [Test-Time-Adaptation(Parkprogrammer addtion)](#test-time-adaptation-with-neuron-amplification)
 - [License & Credits](#-license--credits)
 
 ## 🛠 Getting Started
@@ -34,21 +32,6 @@ cd patchsae
 PYTHONPATH=./ python src/demo/app.py
 ```
 
-## 🎮 Interactive Demo
-
-### Online Demo on Hugging Face 🤗 [![Website & Demo](https://img.shields.io/badge/🔗_Website_&_Demo-blue)](https://dynamical-inference.ai/patchsae/)
-
-Explore our pre-computed images and SAE latents without any installation!
-> 💡 The demo may experience slowdowns due to network constraints. For optimal performance, consider disabling your VPN if you encounter any delays.
-
-<div align="center">
-    <img width="390" alt="Demo interface" src="./assets/demo_overview.png">
-</div>
-
-
-### Local Demo: Try Your Own Images
-
-Want to experiment with your own images? Follow these steps:
 
 #### 1. Setup Local Demo
 
@@ -88,12 +71,6 @@ patchsae/
 └── ... (other files)
 ```
 
-#### 2. Launch the Demo
-
-```bash
-PYTHONPATH=./ python src/demo/app.py
-```
-
 ⚠️ **Note**:
 - First run will download datasets from HuggingFace automatically (About 30GB in total)
 - Demo runs on CPU by default
@@ -106,13 +83,10 @@ PYTHONPATH=./ python src/demo/app.py
   - [demo.ipynb](./demo.ipynb)
   - [analysis.ipynb](./analysis/analysis.ipynb)
 
-## 📝 Status Updates
 
-- **Jan 13, 2025**: Training & Analysis code work properly. Minor error in data loading by class when using ImageNet.
-- **Jan 09, 2025**: Analysis code works. Updated training with evaluation during training, fixed optimizer bug.
-- **Jan 07, 2025**: Added analysis code. Reproducibility tests completed (trained on ImageNet, tested on Oxford-Flowers).
-- **Jan 06, 2025**: Training code updated. Reproducibility testing in progress.
-- **Jan 02, 2025**: Training code incomplete in this version. Updates coming soon.
+## Test-Time-Adaptation with Neuron Amplification
+
+
 
 ## 📜 License & Credits
 
