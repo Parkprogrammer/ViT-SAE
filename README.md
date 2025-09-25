@@ -1,4 +1,4 @@
-# PatchSAE: Sparse Autoencoders Reveal Selective Remapping of Visual Concepts During Adaptation
+# From patchSAE to Neroun Amplication and maybe TTA
 
 > Original Authors of the project is  https://github.com/dynamical-inference/patchsae
 
@@ -84,8 +84,11 @@ patchsae/
   - [analysis.ipynb](./analysis/analysis.ipynb)
 
 
-## Test-Time-Adaptation with Neuron Amplification
-
+## 😊 Test-Time-Adaptation with Neuron Amplification
+- run `run_tta.py` for evaluation of Neuron Amplication
+- Implementation Wrapper at `vit_tta.py` using **SAE-Tester**
+- Simple evaluation logic at `evalate.py`
+- Additional experiments coming up...
 
 
 ## 📜 License & Credits
