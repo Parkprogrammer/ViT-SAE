@@ -1,18 +1,19 @@
-# From patchSAE to Neroun Amplication and TTA
+# Adaptation in OOD via SAEs in Vision Transformers
 
-> Original Authors of the project is  https://github.com/dynamical-inference/patchsae
+> Original Authors of the project: <br/>
+> https://github.com/dynamical-inference/patchsae <br/> https://github.com/Prisma-Multimodal/ViT-Prisma
 
 ### *Additional works were done at section TTA 
 
 <div align="center">
-    <img width="800" alt="PatchSAE visualization" src="./assets/sae_arch.gif">
+    <img width="400" alt="PatchSAE visualization" src="./assets/sae_arch.gif">
 </div>
 
 ## 🚀 Quick Navigation
 
 - [Getting Started](#-getting-started)
 - [Training & Analysis](#-patchsae-training-and-analysis)
-- [Neuron Amplication(HERE!)](#-test-time-adaptation-with-neuron-amplification)
+- [Neuron Amplification (HERE!)](#-test-time-adaptation-with-neuron-amplification)
 - [License & Credits](#-license--credits)
 
 ## 🛠 Getting Started
@@ -85,10 +86,112 @@ patchsae/
 
 
 ## 😊 Test-Time-Adaptation with Neuron Amplification
+
+This section implements test-time adaptation using Sparse Autoencoders (SAE) for neuron amplification on Vision Transformers.
+
+> ### patchSAE Version of TTA
+
 - run `run_tta.py` for evaluation of Neuron Amplication
 - Implementation Wrapper at `vit_tta.py` using **SAE-Tester**
 - Simple evaluation logic at `evalate.py`
 - Additional experiments coming up...
+
+------
+
+> ### Prisma Version of TTA
+
+### Setup
+
+#### 1. Install ViT-Prisma Dependencies
+
+The implementation uses [ViT-Prisma](https://github.com/Prisma-Multimodal/ViT-Prisma) for SAE-based interventions. 
+```bash
+# Navigate to ViT-Prisma directory
+cd ViT-Prisma
+
+# Install according to their documentation
+pip install -e .
+
+# Or see: ViT-Prisma/docs for detailed installation instructions
+```
+
+#### 2. Download ImageNet-Sketch Dataset
+```bash
+# Download ImageNet-Sketch (sketch domain for evaluation)
+# Place it in ./data/imagenet_sketch/
+```
+
+### Directory Structure
+```
+.
+├── prisma_tta.py       # Main evaluation script
+├── tools/              # Core implementation modules
+│   ├── config.py       # Configuration settings
+│   ├── models.py       # Model and SAE loading
+│   ├── data.py         # Dataset handling
+│   ├── hooks.py        # Feature amplification hooks
+│   ├── evaluation.py   # Evaluation logic
+│   └── utils.py        # Utility functions
+└── ViT-Prisma/         # SAE implementation (submodule)
+    └── src/
+        └── vit_prisma/
+```
+
+### Usage Examples
+
+#### Basic Evaluation
+```bash
+python prisma_tta.py --data_path ./data/imagenet_sketch
+```
+
+#### Custom Parameters
+```bash
+python prisma_tta.py --data_path ./data/imagenet_sketch \
+    --layers 9 10 11 \
+    --k 1 --gamma 2.0 --eta 1.0 \
+    --batch_size 64 \
+    --save_results
+```
+
+#### Memory-Efficient Execution
+
+For systems with limited GPU memory, use separate passes:
+```bash
+python prisma_tta.py --data_path ./data/imagenet_sketch \
+    --separate_passes \
+    --batch_size 128
+```
+
+#### Quick Test with Subset
+```bash
+python prisma_tta.py --data_path ./data/imagenet_sketch \
+    --subset_size 1000 \
+    --batch_size 32
+```
+
+### Key Parameters
+
+- `--layers`: Transformer layers to apply amplification (default: `[9, 10, 11]`)
+- `--k`: Number of top-K features to amplify (default: `1`)
+- `--gamma`: Amplification coefficient (default: `1.5`)
+- `--eta`: Delta scaling coefficient (default: `1.0`)
+- `--selection_method`: Patch selection method (`topk`, `threshold`, `adaptive`)
+- `--top_k_percent`: Percentage of patches to select (default: `0.4`)
+- `--separate_passes`: Enable memory-efficient evaluation mode
+- `--save_results`: Save results to `./results/` directory
+
+### Implementation Details
+
+- **SAE Integration**: Uses pre-trained SAEs from [Prisma-Multimodal](https://huggingface.co/Prisma-Multimodal)
+- **Neuron Amplification**: Selectively amplifies top-K activated features in SAE latent space
+- **Spatial Selection**: Optional spatial masking for patch-wise feature control
+- **CLIP-based Evaluation**: Zero-shot classification using CLIP text embeddings
+
+### Additional Resources
+
+- Colab notebook: [Prisma-TTA.ipynb](./notebooks/Prisma-TTA.ipynb) (if available)
+- Additional experiments coming up...
+
 
 
 ## 📜 License & Credits
